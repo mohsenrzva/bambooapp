@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bamboo-chat
+  namespace: production
+spec:
+  type: ClusterIP
+  selector:
+    app: bamboo-chat
+  ports:
+    - name: chat
+      port: 4005
+      targetPort: 4005
+      protocol: TCP

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bamboo-mongo
+  namespace: production
+spec:
+  selector:
+    matchLabels:
+      app: bamboo-mongo
+  serviceName: bamboo-mongo
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bamboo-mongo
+    spec:
+      containers:
+        - name: bamboo-mongo
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+              name: bamboo-mongo
+          volumeMounts:
+            - name: mongo-local-storage
+              mountPath: /data/db
+      volumes:
+        - name: mongo-local-storage
+          persistentVolumeClaim:
+            claimName: mongo-pvc

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bamboo-kibana
+  namespace: production
+spec:
+  type: ClusterIP
+  selector:
+    app: bamboo-kibana
+  ports:
+    - name: bamboo-kibana
+      port: 5601
+      targetPort: 5601
+      protocol: TCP

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bamboo-mongo
+  namespace: production
+spec:
+  type: ClusterIP
+  selector:
+    app: bamboo-mongo
+  ports:
+    - name: bamboo-mongo
+      port: 27017
+      targetPort: 27017

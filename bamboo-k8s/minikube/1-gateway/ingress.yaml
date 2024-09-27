@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bamboo-gateway-ingress
+  namespace: production
+spec:
+  ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: bamboo-gateway
+      port:
+        number: 4000
+  tls:
+    - hosts:
+        - bambooapp.com
+      secretName: gateway-ingress-tls
+  rules:
+    - host: bambooapp.com
+      http:
+        paths:
+          - path: /api/gateway/v1
+            pathType: Prefix
+            backend:
+              service:
+                name: bamboo-gateway
+                port:
+                  number: 4000
